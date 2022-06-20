@@ -5,7 +5,7 @@ import sys
 import yaml
 import numpy as np
 import pandas as pd
-from src.util import ExeDataset,write_pred
+from src.util import APKDataset,write_pred
 from src.model import MalConv
 from torch.utils.data import DataLoader
 import torch
@@ -91,9 +91,9 @@ if sample_cnt != 1:
     tr_table = tr_table.sample(n=sample_cnt,random_state=seed)
 
 
-dataloader = DataLoader(ExeDataset(list(tr_table.index), train_data_path, list(tr_table.ground_truth),first_n_byte),
+dataloader = DataLoader(APKDataset(list(tr_table.index), train_data_path, list(tr_table.ground_truth),first_n_byte),
                             batch_size=batch_size, shuffle=True, num_workers=use_cpu)
-validloader = DataLoader(ExeDataset(list(val_table.index), valid_data_path, list(val_table.ground_truth),first_n_byte),
+validloader = DataLoader(APKDataset(list(val_table.index), valid_data_path, list(val_table.ground_truth),first_n_byte),
                         batch_size=batch_size, shuffle=False, num_workers=use_cpu)
 
 valid_idx = list(val_table.index)
